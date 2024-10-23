@@ -5,4 +5,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <string>
-void GetCommand(char* receiving, char talkto[64]);
+#include <arpa/inet.h>
+
+extern char buffer[64];
+
+char* GetCommand(int talkto);

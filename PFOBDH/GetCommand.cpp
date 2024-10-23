@@ -5,29 +5,29 @@
 
 using namespace std;
 
-void GetCommand(char* receiving, char talkto[64])
+char buffer[64] = { 0 };
+
+char* GetCommand(int talkto)
 {
+    memset(buffer, 0, sizeof(buffer));
     // creating socket
     int receivingSocket = socket(AF_INET, SOCK_STREAM, 0);
+    //allows you to use the socket even though the socket might not have been closed yet
+    int opt = 1;
+    setsockopt(receivingSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
     sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET; //Internet domain sockets
-    if (talkto == "GNDtoPF") {
-        serverAddress.sin_port = htons(1000); //port we connect to
+    if (talkto == 1) {
+        serverAddress.sin_port = htons(1200); //port we connect to
     }
-    else if (talkto == "PFtoPL") {
+    else if (talkto == 2) {
         serverAddress.sin_port = htons(2000); //port we connect to
-    }
-    else if (talkto == "PLtoPF") {
-        serverAddress.sin_port = htons(3000); //port we connect to
-    }
-    else if (talkto == "PFtoGND") {
-        serverAddress.sin_port = htons(4000); //port we connect to
     }
     else {
         cout << "code no work" << endl;
     }
-    serverAddress.sin_addr.s_addr = INADDR_ANY; //binding socket to any address
+    serverAddress.sin_addr.s_addr = inet_addr("172.23.240.9"); //binding socket to address for wsl
 
     // binding socket.
     bind(receivingSocket, (struct sockaddr*)&serverAddress,
@@ -37,16 +37,13 @@ void GetCommand(char* receiving, char talkto[64])
     listen(receivingSocket, 5);
 
     // accepting connection request
-    int sendSocket
-        = accept(receivingSocket, nullptr, nullptr);
+    int sendSocket = accept(receivingSocket, nullptr, nullptr);
 
     // recieving data
-    char buffer[64] = { 0 };
     recv(sendSocket, buffer, sizeof(buffer), 0);
-    receiving = buffer;
-
 
     // closing the socket.
     close(receivingSocket);
+    return buffer;
 }
 

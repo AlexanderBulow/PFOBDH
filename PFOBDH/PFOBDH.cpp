@@ -9,6 +9,15 @@ using namespace std;
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	while (true) {
+
+		char command[64] = "something";
+		SendCom(command, 1);
+
+		cout << "send command";
+		//char* receiving = GetCommand(1);
+		//cout << receiving << endl;
+
+	}
 	return 0;
 }
