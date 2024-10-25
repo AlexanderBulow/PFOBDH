@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (PFOBDH "PFOBDH.cpp" "PFOBDH.h" "SendCommand.cpp" "SendCommand.h" "GetCommand.cpp" "GetCommand.h")
+add_executable (PFOBDH "PFOBDH.cpp" "PFOBDH.h" "SendCommand.cpp" "SendCommand.h" "GetCommand.cpp" "GetCommand.h" "SetMode.cpp" "SetMode.h" "Init.cpp" "Init.h" "CheckMode.cpp" "CheckMode.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET PFOBDH PROPERTY CXX_STANDARD 20)
