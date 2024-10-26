@@ -4,6 +4,11 @@
 #include "PFOBDH.h"
 #include "GetCommand.h"
 #include "SendCommand.h"
+#include "SplitTC.h"
+#include "clocktoclockr.h"
+#include "int2hhmmss.h"
+#include "PF_verify.h"
+#include "HK.h"
 
 using namespace std;
 
