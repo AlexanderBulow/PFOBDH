@@ -5,3 +5,5 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+
+int timetag(char command[64]);

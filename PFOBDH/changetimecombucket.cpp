@@ -1,5 +1,7 @@
 #include "changetimecombucket.h"
 #include "hhmmss2int.h"
+#include "int2hhmmss.h"
+using namespace std;
 
 void changetimecombucket(int time) {
 	string row, commandtime;

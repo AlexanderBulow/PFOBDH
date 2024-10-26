@@ -1,4 +1,5 @@
 #include "hhmmss2int.h"
+using namespace std;
 
 int hhmmss2int(string timehhmmss) {
 	istringstream time(timehhmmss);

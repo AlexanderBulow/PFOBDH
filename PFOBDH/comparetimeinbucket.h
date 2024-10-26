@@ -4,3 +4,5 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
+int comparetimeinbucket(int commandtime);

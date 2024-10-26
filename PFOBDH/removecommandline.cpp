@@ -1,4 +1,5 @@
 #include "removecommandline.h"
+using namespace std;
 
 void removecommandline(int removeline) {
 	ifstream bucket("bucket.txt");

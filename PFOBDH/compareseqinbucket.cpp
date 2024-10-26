@@ -1,4 +1,5 @@
 #include "compareseqinbucket.h"
+using namespace std;
 
 
 int compareseqinbucket(int seq) {

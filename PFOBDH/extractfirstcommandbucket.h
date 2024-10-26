@@ -5,3 +5,5 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+
+std::string extractfirstcommandbucket();

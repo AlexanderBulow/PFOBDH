@@ -1,5 +1,6 @@
 #include "comparetimeinbucket.h"
-#include "hhmmss2int"
+#include "hhmmss2int.h"
+using namespace std;
 
 int comparetimeinbucket(int commandtime) {
 	ifstream bucket("bucket.txt");

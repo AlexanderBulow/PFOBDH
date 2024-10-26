@@ -9,6 +9,16 @@
 #include "CheckMode.h"
 #include "SetTime.h"
 #include "GetTime.h"
+#include "changetimecombucket.h"
+#include "compareseqinbucket.h"
+#include "comparetimeinbucket.h"
+#include "editbucket.h"
+#include "extractfirstcommandbucket.h"
+#include "hhmmss2int.h"
+#include "int2hhmmss.h"
+#include "removecommandline.h"
+#include "timetag.h"
+
 
 using namespace std;
 

@@ -1,6 +1,7 @@
 #include "timetag.h"
 #include "hhmmss2int.h"
 #include "comparetimeinbucket.h"
+using namespace std;
 
 int timetag(char command[64]) {
 	istringstream commandss(command);

@@ -1,4 +1,5 @@
 #include "extractfirstcommandbucket.h"
+using namespace std;
 
 string extractfirstcommandbucket() {
 	string command, row;

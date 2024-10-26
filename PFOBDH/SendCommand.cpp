@@ -1,8 +1,6 @@
-
-
 #include "SendCommand.h"
-
 using namespace std;
+
 
 void SendCom(char Command[64], int talkto) {
     // creating socket

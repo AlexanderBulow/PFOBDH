@@ -1,4 +1,5 @@
 #include "int2hhmmss.h"
+using namespace std;
 
 string int2hhmmss(int clock) {
 	int hourss = clock / 3600;

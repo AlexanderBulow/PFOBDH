@@ -5,3 +5,4 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+void changetimecombucket(int time);
