@@ -24,21 +24,21 @@ using namespace std;
 
 int main()
 {
-	while (true) {
+	//while (true) {
 		GetTime();
 
 		SetTime(22,5,0);
 	
 
-		char command[64] = "something";
-		SendCom(command, 1);
+		//char command[64] = "something";
+		//SendCom(command, 1);
 
-		cout << "send command";
-		char* receiving = GetCommand(1);
-		cout << receiving << endl;
+		//cout << "send command";
+		//char* receiving = GetCommand(1);
+		//cout << receiving << endl;
 
 		
-		cout << "start";
+		cout << "start" << endl;
 		string newmode = "TargetMode";
 		if (SetMode(newmode) == 1) {
 			cout << "The mode has been changed to: " << newmode << endl;
@@ -49,6 +49,6 @@ int main()
 		
 		cout << "current mode is " << CheckMode() << endl;
 		
-	}
+	//}
 	return 0;
 }
