@@ -1,10 +1,12 @@
 #include "Init.h"
+
 using namespace std;
 
 string mode = "SafeMode";
 
 int TimeElapsed;
 int OffsetInTime = 0;
+int OldTime;
 
 time_t GetLocalTime = time(nullptr);
 string Time = ctime(&GetLocalTime);

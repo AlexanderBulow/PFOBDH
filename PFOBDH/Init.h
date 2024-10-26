@@ -10,3 +10,4 @@ extern int InitialMinutesAsInt;
 extern int InitialSecondsAsInt;
 extern int TimeElapsed;
 extern int OffsetInTime;
+extern int OldTime;

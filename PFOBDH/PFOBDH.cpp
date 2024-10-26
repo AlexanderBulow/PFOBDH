@@ -18,6 +18,7 @@
 #include "int2hhmmss.h"
 #include "removecommandline.h"
 #include "timetag.h"
+#include "TimeDiff.h"
 
 
 using namespace std;
