@@ -21,6 +21,7 @@ void SendCom(char Command[64], int talkto) {
     else {
         cout << "code no work" << endl;
     }
+    //wsl1 address = 127.0.0.1 wsl2 address = 172.23.240.9
     serverAddress.sin_addr.s_addr = inet_addr("172.23.240.9"); //binding socket to address for wsl
     cout << "1" << endl;
     // sending connection request if it fails we retry
