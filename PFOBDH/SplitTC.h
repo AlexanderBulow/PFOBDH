@@ -6,4 +6,4 @@
 #include <chrono>
 #include <thread>
 
-void SplitTC(int* time, std::string* dtime, char* sequence, std::string* targetstr, char* targetf, std::string* commandstr, char* commandf, string* argumentstr, char* argumentf, int* argumentt, char telecommand[64]);
+void SplitTC(int* time, std::string* dtime, char* sequence, std::string* targetstr, char* targetf, std::string* commandstr, char* commandf, std::string* argumentstr, char* argumentf, int* argumentt, char telecommand[64]);
