@@ -87,6 +87,14 @@ void SplitTC(int* time, string* dtime, char* sequence, string* targetstr, char* 
 
         if (isNumeric) {
             *argumentt = stoi(argumentstri); // Convert to int if valid
+            if (*argumentt >= 59) {
+                int hours = *argumentt / 10000;              // First two digits for hours
+                int minutes = (*argumentt / 100) % 100;      // Next two digits for minutes
+                int seconds = *argumentt % 100;              // Last two digits for seconds
+
+                // Convert to total seconds
+                *argumentt = (hours * 3600) + (minutes * 60) + seconds;
+            }
         }
         else {
             *argumentstr = argumentstri;

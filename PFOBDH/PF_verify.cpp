@@ -60,7 +60,7 @@ void PF_verify(int* time, string* dtime, int clock, char sequence[64], string ta
         *commandvalid = fa;
     }
     //checking that argument is valid
-    if (argumentstr == "safemode" || argumentstr == "targetmode" || argumentstr == "all" || (argumentt == 2000 && argumentstr.empty()) || argumentt < 2000) {
+    if (argumentstr == "safemode" || argumentstr == "targetmode" || argumentstr == "all" || (argumentt == 300000 && argumentstr.empty()) || argumentt < 300000) {
         *argumentvalid = tr;
     }
     else {

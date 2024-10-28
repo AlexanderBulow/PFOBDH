@@ -3,4 +3,4 @@
 #include <cstring>
 #include <string>
 
-void SetTime(int hours, int minutes, int seconds);
+void SetTime(int curtime);
