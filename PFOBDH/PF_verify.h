@@ -6,4 +6,4 @@
 #include <chrono>
 #include <thread>
 
-void PF_verify(int* time, std::string* dtime, int clock, char sequence[64], std::string targetstr, std::string commandstr, std::string argumentstr, int argumentt, int* previousseqcount, int* currentcount, int* valid, char telecommand[64]);
+void PF_verify(int* time, string* dtime, int clock, char sequence[64], string targetstr, string commandstr, string argumentstr, int argumentt, int* previousseqcount, int* currentcount, int* valid, int* timevalid, int* sequencevalid, int* targetvalid, int* commandvalid, int* argumentvalid, char telecommand[64]);
