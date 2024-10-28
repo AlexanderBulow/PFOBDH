@@ -1,4 +1,5 @@
 #include "ValidWrong.h"
+using namespace std;
 
 string validwrong(int timevalid, int sequencevalid, int targetvalid, int commandvalid, int argumentvalid, int bucket) {
     if (timevalid == 0) {

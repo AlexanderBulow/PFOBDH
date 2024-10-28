@@ -64,7 +64,7 @@ void SplitTC(int* time, string* dtime, char* sequence, string* targetstr, char* 
     sequencef[s] = '\0';
     timef[t] = '\0';
     string timestr(timef);
-    if (timestr == "dddddd") {
+    if (timestr == "dddddd" || !isdigit(timestr[0])) {
         *dtime = timestr;
     }
     else {

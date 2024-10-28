@@ -7,11 +7,11 @@ void PF_verify(int* time, string* dtime, int clock, char sequence[64], string ta
 {
     int tr = 1;
     int fa = 0;
-    int timevalid = 0;
-    int sequencevalid = 0;
-    int targetvalid = 0;
-    int commandvalid = 0;
-    int argumentvalid = 0;
+    *timevalid = 0;
+    *sequencevalid = 0;
+    *targetvalid = 0;
+    *commandvalid = 0;
+    *argumentvalid = 0;
     //everything in the if statement below is for validating the timestamp in the telecommand
     //checks that the time array has something other than zeroes
     //checks if time has already occured

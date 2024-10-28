@@ -3,8 +3,9 @@
 using namespace std;
 
 int timeofextractedcommand(string command) {
+	stringstream commandss(command);
 	string time;
-	getline(command, time, '-');
+	getline(commandss, time, '-');
 	int timeint = hhmmss2int(time);
 	return timeint;
 }

@@ -64,6 +64,7 @@ int main()
         string argumentstr = ("0");
         int argumentt = 300000;
         char* receiving = GetCommand(1);
+        cout << receiving;
         int bucket = 1;
         string wholecommand;
         if (receiving == "X"&&GetTime()!=nextcommandtime) {
