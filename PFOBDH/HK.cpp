@@ -15,7 +15,6 @@ void HK(int clock, int* bl, int* fl, int* temp, char* housek) {
     }
 
     string clockstrcomplete = int2hhmmss(clock);
-    cout << "clock: " << clockstrcomplete << endl;
 
     for (int cl = 0; cl < 8; cl++) {
         housek[cl] = clockstrcomplete[cl];

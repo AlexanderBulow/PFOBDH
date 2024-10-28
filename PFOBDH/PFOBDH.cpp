@@ -26,6 +26,7 @@
 #include "TimeDiff.h"
 #include "ValidWrong.h"
 #include "timeofextractedcommand.h"
+#include "RunCommand.h"
 
 
 using namespace std;
@@ -55,22 +56,66 @@ int main()
     string nextcommand;
     char nextcommandch[64];
     int nextcommandtime = 1000000;
-
-
+    char* receiving;
+    int runnow;
 
     while (1) {
+        sleep(1);
         char sendcommandtognd[64] = { 0 };
         string dtime = ("0");
         string argumentstr = ("0");
         int argumentt = 300000;
-        char* receiving = GetCommand(1);
+        receiving = GetCommand(1);
         cout << receiving;
-        int bucket = 1;
-        string wholecommand;
-        if (receiving == "X"&&GetTime()!=nextcommandtime) {
-            SendCom(sendcommandtognd, 1);
-            SendCom(sendcommandtognd, 1);
+        //checking for run now
+        SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
+        if (dtime == "dddddd") {
+            runnow = 1;
         }
+        else {
+            runnow = 0;
+        }
+        //checking if the command is valid or not 
+        if (receiving[0] != 'X') {
+            PF_verify(&time, &dtime, GetTime(), sequencef, targetstr, commandstr, argumentstr, argumentt, &previousseqcount, &currentcount, &valid, &timevalid, &sequencevalid, &targetvalid, &commandvalid, &argumentvalid, receiving);
+            if (valid == 1) {
+                string add;
+                strcpy(receiving, add.c_str());
+                add = add + "success";
+                auto first = add.begin();
+                auto last = add.end();
+                // Convert the string to char array
+                copy(first, last, newreceiving);
+                SendCom(newreceiving, 2);
+            }
+            else {
+                string add;
+                strcpy(receiving, add.c_str());
+                add = add + "fail";
+                auto first = add.begin();
+                auto last = add.end();
+                // Convert the string to char array
+                copy(first, last, newreceiving);
+                SendCom(newreceiving, 2);
+            }
+        }
+        //int bucket = 1;
+        //string wholecommand;
+        if (receiving[0] == 'X' /*&& GetTime() != nextcommandtime*/) {
+            SendCom(sendcommandtognd, 2);
+            SendCom(sendcommandtognd, 3);
+        }
+        else if(runnow == 1){
+            RunCom(receiving, commandstr, argumentt, argumentstr, commandf);
+        }
+        else {
+            //add code to check for next command in bucket and seeing if it is less then current time
+        }
+
+
+
+        //scary statement 
+        /*
         else {
             if (GetTime() >= nextcommandtime) {
                 strcpy(nextcommandch, nextcommand.c_str());
@@ -102,7 +147,7 @@ int main()
                 string timeofexe = int2hhmmss(GetTime());
                 wholecommand = timeofexe + wholecommand;
                 strcpy(sendcommandtognd, wholecommand.c_str());
-                SendCom(sendcommandtognd, 1);
+                SendCom(sendcommandtognd, 2);
             }
             else {
                 SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
@@ -120,7 +165,7 @@ int main()
                     auto last = add.end();
                     // Convert the string to char array
                     copy(first, last, newreceiving);
-                    SendCom(newreceiving, 1);
+                    SendCom(newreceiving, 2);
 
                     if (dtime == "dddddd") {
                         if (commandstr == "set_time") {
@@ -164,7 +209,7 @@ int main()
                     string timeofexe = int2hhmmss(GetTime());
                     wholecommand = timeofexe + wholecommand;
                     strcpy(sendcommandtognd, wholecommand.c_str());
-                    SendCom(sendcommandtognd, 1);
+                    SendCom(sendcommandtognd, 2);
                 }
                 else {
                     string add;
@@ -181,11 +226,15 @@ int main()
             }
 
         }
+        */
+        //if (GetTime() % 3 == 0) {
+            HK(GetTime(), &bl, &fl, &temp, housek);
+            SendCom(housek, 4);
+            cout << "housekeeping: " << housek << endl;
+        //}
 
-       
 
-
-
+            receiving = { 0 };
 	}
 	return 0;
 }
