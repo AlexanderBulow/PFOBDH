@@ -35,7 +35,7 @@ int main()
 {
     int bl = 55;
     int fl = 50;
-    int temp = 15;
+    int temp = 270;
     char housek[64] = { 0 };
     int time = 0;
     char sequencef[64] = { 0 };
@@ -91,7 +91,8 @@ int main()
             }
             else {
                 string add(receiving);
-                add = add + " fail";
+                string wrong = validwrong(timevalid, sequencevalid, targetvalid, commandvalid, argumentvalid);
+                add = add + wrong;
                 strcpy(newreceiving, add.c_str());
                 SendCom(newreceiving, 2);
             }
