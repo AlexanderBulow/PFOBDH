@@ -3,8 +3,8 @@
 #include "comparetimeinbucket.h"
 using namespace std;
 
-int timetag(char command[64]) {
-	istringstream commandss(command);
+int timetag(char kuk[64]) {
+	istringstream commandss(kuk);
 	string commandtime;
 	getline(commandss, commandtime, '-');
 	int commandtimeint = hhmmss2int(commandtime);
@@ -18,13 +18,13 @@ int timetag(char command[64]) {
 	int i = 1;
 	while (getline(bucket, row)) {
 		if (i == placement) {
-			newbucket << command << endl;
+			newbucket << kuk << endl;
 		}
 		newbucket << row << endl;
 		i++;
 	}
 	if (i == placement) {
-		newbucket << command << endl;
+		newbucket << kuk << endl;
 	}
 	bucket.close();
 	newbucket.close();

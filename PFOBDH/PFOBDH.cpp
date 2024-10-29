@@ -54,9 +54,12 @@ int main()
     int argumentvalid = 0;
     char newreceiving[64];
     string nextcommand;
-    char nextcommandch[64];
+    char something[64] = {0};
+    char* nextcommandch;
+    nextcommandch = something;
     int nextcommandtime = 1000000;
     char* receiving;
+    char* thecommandwegot;
     int runnow;
 
     while (1) {
@@ -67,7 +70,6 @@ int main()
         valid = 0;
         int argumentt = 300000;
         receiving = GetCommand(1);
-        cout << receiving;
         //checking for run now
         if (receiving[0] != 'X') {
             SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
@@ -82,37 +84,32 @@ int main()
         if (receiving[0] != 'X') {
             PF_verify(&time, &dtime, GetTime(), sequencef, targetstr, commandstr, argumentstr, argumentt, &previousseqcount, &currentcount, &valid, &timevalid, &sequencevalid, &targetvalid, &commandvalid, &argumentvalid, receiving);
             if (valid == 1) {
-                string add;
-                strcpy(receiving, add.c_str());
-                add = add + "success";
-                auto first = add.begin();
-                auto last = add.end();
-                // Convert the string to char array
-                copy(first, last, newreceiving);
+                string add(receiving);
+                add = add + " success";
+                strcpy(newreceiving, add.c_str());
                 SendCom(newreceiving, 2);
             }
             else {
-                string add;
-                strcpy(receiving, add.c_str());
-                add = add + "fail";
-                auto first = add.begin();
-                auto last = add.end();
-                // Convert the string to char array
-                copy(first, last, newreceiving);
+                string add(receiving);
+                add = add + " fail";
+                strcpy(newreceiving, add.c_str());
                 SendCom(newreceiving, 2);
             }
         }
-        if (runnow == 0 && valid == 1) {
-            if (time<nextcommandtime && nextcommand[0]!='\0') {
+        if (runnow == 0 && valid == 1 && receiving[0] != 'X') {
+            if (time<nextcommandtime && nextcommandch[0]!='\0') {
                 timetag(nextcommandch);
                 nextcommandtime = time;
-                *nextcommandch = *receiving;
+                nextcommandch = receiving;
             }
-            else if (time < nextcommandtime && nextcommand[0] == '\0') {
+            else if (time < nextcommandtime && nextcommandch[0] == '\0') {
                 nextcommandtime = time;
-                *nextcommandch = *receiving;
+                nextcommandch = receiving;
+
             }
-            else{ timetag(receiving); }
+            else{ 
+                timetag(receiving);
+            }
         }
         //int bucket = 1;
         //string wholecommand;
@@ -126,6 +123,7 @@ int main()
         else {
             //add code to check for next command in bucket and seeing if it is less then current time
             if (GetTime()>=nextcommandtime) {
+                cout << 1;
                 SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
                 RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf);
                 nextcommand = extractfirstcommandbucket();
@@ -133,125 +131,10 @@ int main()
                 nextcommandtime = timeofextractedcommand(nextcommand);
             }
             else {
+                cout << 2;
                 SendCom(sendcommandtognd, 3);
             }
         }
-
-
-
-        //scary statement 
-        /*
-        else {
-            if (GetTime() >= nextcommandtime) {
-                strcpy(nextcommandch, nextcommand.c_str());
-                SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
-                if (commandstr == "set_time") {
-                    SetTime(argumentt);
-                    changetimecombucket(TimeDiff());
-                    wholecommand = " Time changed ";
-                    nextcommandtime = nextcommandtime - TimeDiff();
-                }
-                else if (commandstr == "chng_mode") {
-                    SetMode(argumentstr);
-                    SendCom(commandf, 2);
-                    char* PLCommand = GetCommand(2);
-                    wholecommand = " Mode changed ";
-                }
-                else if (commandstr == "rmve_data") {
-                    removecommandline(argumentt);
-                    wholecommand = " Command removed ";
-                }
-                else if (commandstr == "t_picture") {
-                    SendCom(commandf, 2);
-                    char* PLCommand = GetCommand(2);
-                    wholecommand = PLCommand;
-                }
-                else {
-                    cout << "sum ting wong" << endl;
-                }
-                string timeofexe = int2hhmmss(GetTime());
-                wholecommand = timeofexe + wholecommand;
-                strcpy(sendcommandtognd, wholecommand.c_str());
-                SendCom(sendcommandtognd, 2);
-            }
-            else {
-                SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
-                PF_verify(&time, &dtime, GetTime(), sequencef, targetstr, commandstr, argumentstr, argumentt, &previousseqcount, &currentcount, &valid, &timevalid, &sequencevalid, &targetvalid, &commandvalid, &argumentvalid, receiving);
-                if (dtime != "dddddd") {
-                    string receivingstr(receiving);
-                    int receivedcommandtime = timeofextractedcommand(receivingstr);
-                    int bucket = comparetimeinbucket(receivedcommandtime) * (nextcommandtime != receivedcommandtime);
-                }
-                if (valid == 1 && bucket == 1) {
-                    string add;
-                    strcpy(receiving, add.c_str());
-                    add = add + "success";
-                    auto first = add.begin();
-                    auto last = add.end();
-                    // Convert the string to char array
-                    copy(first, last, newreceiving);
-                    SendCom(newreceiving, 2);
-
-                    if (dtime == "dddddd") {
-                        if (commandstr == "set_time") {
-                            SetTime(argumentt);
-                            changetimecombucket(TimeDiff());
-                            wholecommand = " Time changed ";
-                            nextcommandtime = nextcommandtime - TimeDiff();
-                        }
-                        else if (commandstr == "chng_mode") {
-                            SetMode(argumentstr);
-                            SendCom(commandf, 2);
-                            char* PLCommand = GetCommand(2);
-                            wholecommand = " Mode changed ";
-                        }
-                        else if (commandstr == "rmve_data") {
-                            removecommandline(argumentt);
-                            wholecommand = " Command removed ";
-                        }
-                        else if (commandstr == "t_picture") {
-                            SendCom(commandf, 2);
-                            char* PLCommand = GetCommand(2);
-                            wholecommand = PLCommand;
-                        }
-                        else {
-                            cout << "sum ting wong" << endl;
-                        }
-                    }
-                    else {
-                        string receivingstr(receiving);
-                        int receivedcommandtime = timeofextractedcommand(receivingstr);
-                        if (nextcommandtime > receivedcommandtime) {
-                            strcpy(nextcommandch, nextcommand.c_str());
-                            timetag(nextcommandch);
-                            nextcommandtime = receivedcommandtime;
-                            nextcommand = receivingstr;
-                        }
-                        else {
-                            timetag(receiving);
-                        }
-                    }
-                    string timeofexe = int2hhmmss(GetTime());
-                    wholecommand = timeofexe + wholecommand;
-                    strcpy(sendcommandtognd, wholecommand.c_str());
-                    SendCom(sendcommandtognd, 2);
-                }
-                else {
-                    string add;
-                    string wrong = validwrong(timevalid, sequencevalid, targetvalid, commandvalid, argumentvalid, bucket);
-                    strcpy(receiving, add.c_str());
-                    add = add + wrong;
-                    auto first = add.begin();
-                    auto last = add.end();
-                    // Convert the string to char array
-                    copy(first, last, newreceiving);
-                    SendCom(newreceiving, 1);
-                    SendCom(sendcommandtognd, 1);
-                }
-            }
-
-        }
-        */
         //if (GetTime() % 3 == 0) {
             HK(GetTime(), &bl, &fl, &temp, housek);
             SendCom(housek, 4);

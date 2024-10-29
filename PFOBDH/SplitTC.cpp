@@ -1,10 +1,10 @@
 #include "SplitTC.h"
 using namespace std;
 
-void SplitTC(int* time, string* dtime, char* sequence, string* targetstr, char* targetf, string* commandstr, char* commandf, string* argumentstr, char* argumentf, int* argumentt, char telecommand[64])
+void SplitTC(int* time, string* dtime, char* sequencef, string* targetstr, char* targetf, string* commandstr, char* commandf, string* argumentstr, char* argumentf, int* argumentt, char telecommand[64])
 {
     char timef[64] = { 0 };
-    char sequencef[64] = { 0 };
+    sequencef[64] = { 0 };
     targetf[64] = { 0 };
     commandf[64] = { 0 };
     argumentf[64] = { 0 };
