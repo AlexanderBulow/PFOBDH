@@ -69,6 +69,12 @@ void SplitTC(int* time, string* dtime, char* sequence, string* targetstr, char* 
     }
     else {
         *time = stoi(timestr);
+        int hours = *time / 10000;              // First two digits for hours
+        int minutes = (*time / 100) % 100;      // Next two digits for minutes
+        int seconds = *time % 100;              // Last two digits for seconds
+
+        // Convert to total seconds
+        *time = (hours * 3600) + (minutes * 60) + seconds;
     }
     targetf[p] = '\0';
     commandf[c] = '\0';

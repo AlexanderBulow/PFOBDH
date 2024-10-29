@@ -99,9 +99,17 @@ int main()
                 SendCom(newreceiving, 2);
             }
         }
+        if (runnow == 0 && valid == 1) {
+            if (time<nextcommandtime) {
+                timetag(nextcommandch);
+                nextcommandtime = time;
+                *nextcommandch = *receiving;
+            }
+            else{ timetag(receiving); }
+        }
         //int bucket = 1;
         //string wholecommand;
-        if (receiving[0] == 'X' /*&& GetTime() != nextcommandtime*/) {
+        if (receiving[0] == 'X' && GetTime() < nextcommandtime) {
             SendCom(sendcommandtognd, 2);
             SendCom(sendcommandtognd, 3);
         }
@@ -110,6 +118,16 @@ int main()
         }
         else {
             //add code to check for next command in bucket and seeing if it is less then current time
+            if (GetTime()>=nextcommandtime) {
+                SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
+                RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf);
+                nextcommand = extractfirstcommandbucket();
+                strcpy(nextcommandch, nextcommand.c_str());
+                nextcommandtime = timeofextractedcommand(nextcommand);
+            }
+            else {
+                SendCom(sendcommandtognd, 3);
+            }
         }
 
 
