@@ -66,7 +66,7 @@ void PF_verify(int* time, string* dtime, int clock, char sequence[64], string ta
     else {
         *argumentvalid = fa;
     }
-    if (previousseqcount != currentcount && (*timevalid != 1 || *targetvalid != 1 || *commandvalid != 1 || *argumentvalid != 1 || *sequencevalid != 1)) {
+    if (*previousseqcount != *currentcount && (*timevalid != 1 || *targetvalid != 1 || *commandvalid != 1 || *argumentvalid != 1 || *sequencevalid != 1)) {
         *currentcount = *currentcount - 1;
         //send to grn: "telcommand" is not valid.
         *valid = 0;

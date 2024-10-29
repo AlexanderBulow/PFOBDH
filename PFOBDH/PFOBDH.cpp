@@ -64,11 +64,14 @@ int main()
         char sendcommandtognd[64] = { 0 };
         string dtime = ("0");
         string argumentstr = ("0");
+        valid = 0;
         int argumentt = 300000;
         receiving = GetCommand(1);
         cout << receiving;
         //checking for run now
-        SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
+        if (receiving[0] != 'X') {
+            SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, receiving);
+        }
         if (dtime == "dddddd") {
             runnow = 1;
         }
@@ -100,8 +103,12 @@ int main()
             }
         }
         if (runnow == 0 && valid == 1) {
-            if (time<nextcommandtime) {
+            if (time<nextcommandtime && nextcommand[0]!='\0') {
                 timetag(nextcommandch);
+                nextcommandtime = time;
+                *nextcommandch = *receiving;
+            }
+            else if (time < nextcommandtime && nextcommand[0] == '\0') {
                 nextcommandtime = time;
                 *nextcommandch = *receiving;
             }
