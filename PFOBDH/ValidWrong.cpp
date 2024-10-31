@@ -2,6 +2,7 @@
 using namespace std;
 
 string validwrong(int timevalid, int sequencevalid, int targetvalid, int commandvalid, int argumentvalid) {
+
     string wrong = "0";
     if (timevalid == 0) {
         wrong = " Failed: Time is invalid";
@@ -26,5 +27,6 @@ string validwrong(int timevalid, int sequencevalid, int targetvalid, int command
     else {
         wrong = " Something is very wrong ith code";
         return wrong;
+
     }
 }
