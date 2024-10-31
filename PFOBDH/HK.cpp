@@ -33,6 +33,7 @@ void HK(int clock, int* bl, int* fl, int* temp, char* housek) {
     housek[14] = '-';
     housek[15] = tempstr[0];
     housek[16] = tempstr[1];
+    housek[17] = tempstr[2];
 
-    housek[17] = '\0'; // Null-terminate the string
+    housek[18] = '\0'; // Null-terminate the string
 }
