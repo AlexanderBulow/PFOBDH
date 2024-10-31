@@ -9,6 +9,7 @@
 #include "SetMode.h"
 #include "SplitTC.h"
 #include "TimeDiff.h"
+#include "Init.h"
 using namespace std;
 
 void RunCom(char receivedcom[64], string commandstr, int argumentt, string argumentstr, char commandf[64], char argumentf[64]) {
@@ -16,6 +17,7 @@ void RunCom(char receivedcom[64], string commandstr, int argumentt, string argum
     if (commandstr == "set_time") {
         SetTime(argumentt);
         changetimecombucket(TimeDiff());
+        nextcommandtime = nextcommandtime - TimeDiff();
         wholecommand = " Time changed ";
     }
     else if (commandstr == "chng_mode") {

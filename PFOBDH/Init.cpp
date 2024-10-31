@@ -7,6 +7,7 @@ string mode = "SafeMode";
 int TimeElapsed;
 int OffsetInTime = 0;
 int OldTime;
+int nextcommandtime = 1000000;
 
 time_t GetLocalTime = time(nullptr);
 string Time = ctime(&GetLocalTime);

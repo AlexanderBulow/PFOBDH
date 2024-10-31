@@ -34,7 +34,7 @@ using namespace std;
 int main()
 {
     int bl = 55;
-    int fl = 50;
+    int fl = 100;
     int temp = 270;
     char housek[64] = { 0 };
     int time = 0;
@@ -54,15 +54,13 @@ int main()
     int argumentvalid = 0;
     char newreceiving[64];
     string nextcommand;
-    char something[64] = { 0 };
-    something[0] = 'y';
-    char nextcommandch;
-    nextcommandch[0] = something[0];
-    int nextcommandtime = 1000000;
+    char nextcommandch[64] = { 0 };
+    nextcommandch[0] = 'y';
     char* receiving;
-    char* thecommandwegot;
     int runnow;
-
+    ofstream fout;
+    fout.open("bucket.txt", ios::trunc);
+    fout.close();
     while (1) {
         char sendcommandtognd[64] = { 0 };
         string dtime = ("0");
@@ -99,17 +97,16 @@ int main()
             }
         }
         if (runnow == 0 && valid == 1 && receiving[0] != 'X') {
-            cout << time << endl;
-            cout << nextcommandch << endl;
-            cout << nextcommandtime << endl;
             if (time<nextcommandtime && nextcommandch[0]!='y') {
                 timetag(nextcommandch);
                 nextcommandtime = time;
-                strcpy(nextcommandch, receiving);
+                string nextcommandstring(receiving);
+                strcpy(nextcommandch, nextcommandstring.c_str());
             }
             else if (time < nextcommandtime && nextcommandch[0] == 'y') {
                 nextcommandtime = time;
-                strcpy(nextcommandch,receiving);
+                string nextcommandstring(receiving);
+                strcpy(nextcommandch, nextcommandstring.c_str());
             }
             else{ 
                 timetag(receiving);
@@ -128,8 +125,6 @@ int main()
             //add code to check for next command in bucket and seeing if it is less then current time
             if (GetTime()>=nextcommandtime) {
                 SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
-                cout << nextcommandch << endl;
-                cout << commandstr << endl;
                 RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf, argumentf);
                 nextcommand = extractfirstcommandbucket();
                 strcpy(nextcommandch, nextcommand.c_str());
@@ -145,8 +140,6 @@ int main()
             cout << "housekeeping: " << housek << endl;
         //}
 
-
-            receiving = { 0 };
 	}
 	return 0;
 }
