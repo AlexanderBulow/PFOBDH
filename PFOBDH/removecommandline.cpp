@@ -7,7 +7,7 @@ void removecommandline(int removeline) {
 	string row;
 	int i = 0;
 	while (getline(bucket, row)) {
-		if (i != removeline) {
+		if (i != removeline-1) {
 			newbucket << row << endl;
 		}
 		i++;

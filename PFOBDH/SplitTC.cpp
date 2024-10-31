@@ -1,4 +1,5 @@
 #include "SplitTC.h"
+#include "Init.h"
 using namespace std;
 
 void SplitTC(int* time, string* dtime, char* sequencef, string* targetstr, char* targetf, string* commandstr, char* commandf, string* argumentstr, char* argumentf, int* argumentt, char telecommand[64])

@@ -29,15 +29,11 @@
 #include "RunCommand.h"
 
 
+
 using namespace std;
 
 int main()
 {
-    int bl = 55;
-    int fl = 100;
-    int temp = 270;
-    char housek[64] = { 0 };
-    int time = 0;
     char sequencef[64] = { 0 };
     char targetf[64] = { 0 };
     char commandf[64] = { 0 };
@@ -45,19 +41,16 @@ int main()
     int previousseqcount = 0;
     int currentcount = 0;
     int valid = 0;
-    string targetstr = ("0");
-    string commandstr = ("0");
     int timevalid = 0;
     int sequencevalid = 0;
     int targetvalid = 0;
     int commandvalid = 0;
     int argumentvalid = 0;
-    char newreceiving[64];
-    string nextcommand;
-    char nextcommandch[64] = { 0 };
+    int time = 0;
+    string targetstr = ("0");
+    string commandstr = ("0");
     nextcommandch[0] = 'y';
     char* receiving;
-    int runnow;
     ofstream fout;
     fout.open("bucket.txt", ios::trunc);
     fout.close();
@@ -124,11 +117,30 @@ int main()
         else {
             //add code to check for next command in bucket and seeing if it is less then current time
             if (GetTime()>=nextcommandtime) {
+                SendCom(sendcommandtognd, 2);
+                cout << " 1 " << endl;
                 SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
+                cout << " 2 " << endl;
+                cout << nextcommandch << endl;
+                cout << commandstr << endl << argumentt << endl << argumentstr << endl << commandf << endl << argumentf << endl;
                 RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf, argumentf);
-                nextcommand = extractfirstcommandbucket();
-                strcpy(nextcommandch, nextcommand.c_str());
-                nextcommandtime = timeofextractedcommand(nextcommand);
+                cout << " 3 " << endl;
+                ifstream bucket("bucket.txt", ios::ate);
+                if (bucket.tellg() == 0) {
+                    cout << " 4 " << endl;
+                    bucket.close();
+                    nextcommandch[0] = 'y';
+                    nextcommandtime = 1000000;
+                }
+                else {
+                    cout << " 5 " << endl;
+                    bucket.close();
+                    nextcommand = extractfirstcommandbucket();
+                    strcpy(nextcommandch, nextcommand.c_str());
+                    nextcommandtime = timeofextractedcommand(nextcommand);
+                }
+                
+
             }
             else {
                 SendCom(sendcommandtognd, 3);

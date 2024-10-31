@@ -2,6 +2,7 @@
 #include "PF_verify.h"
 #include "SendCommand.h"
 #include "GetTime.h"
+#include "Init.h"
 using namespace std;
 
 void PF_verify(int* time, string* dtime, int clock, char sequencef[64], string targetstr, string commandstr, string argumentstr, int argumentt, int* previousseqcount, int* currentcount, int* valid, int* timevalid, int* sequencevalid, int* targetvalid, int* commandvalid, int* argumentvalid, char telecommand[64])

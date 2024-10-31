@@ -1,5 +1,6 @@
 #include "HK.h"
 #include "int2hhmmss.h"
+#include "Init.h"
 using namespace std;
 
 void HK(int clock, int* bl, int* fl, int* temp, char* housek) {

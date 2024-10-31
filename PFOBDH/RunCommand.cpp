@@ -10,14 +10,21 @@
 #include "SplitTC.h"
 #include "TimeDiff.h"
 #include "Init.h"
+#include "editbucket.h"
 using namespace std;
 
 void RunCom(char receivedcom[64], string commandstr, int argumentt, string argumentstr, char commandf[64], char argumentf[64]) {
     string wholecommand;
     if (commandstr == "set_time") {
         SetTime(argumentt);
-        changetimecombucket(TimeDiff());
-        nextcommandtime = nextcommandtime - TimeDiff();
+        ifstream bucket("bucket.txt", ios::ate);
+        if (bucket.tellg() != 0) {
+            changetimecombucket(TimeDiff());
+        }
+        if (nextcommandtime != 1000000) {
+            nextcommandtime = nextcommandtime - TimeDiff();
+        }
+        bucket.close();
         wholecommand = " Time changed ";
     }
     else if (commandstr == "chng_mode") {
@@ -27,7 +34,8 @@ void RunCom(char receivedcom[64], string commandstr, int argumentt, string argum
         wholecommand = " Mode changed ";
     }
     else if (commandstr == "rmve_data") {
-        removecommandline(argumentt);
+
+        cout << editbucket(commandf, argumentf) << endl;
         wholecommand = " Command removed ";
     }
     else if (commandstr == "t_picture") {
