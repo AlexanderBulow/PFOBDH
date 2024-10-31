@@ -54,16 +54,16 @@ int main()
     int argumentvalid = 0;
     char newreceiving[64];
     string nextcommand;
-    char something[64] = {0};
-    char* nextcommandch;
-    nextcommandch = something;
+    char something[64] = { 0 };
+    something[0] = 'y';
+    char nextcommandch;
+    nextcommandch[0] = something[0];
     int nextcommandtime = 1000000;
     char* receiving;
     char* thecommandwegot;
     int runnow;
 
     while (1) {
-        sleep(1);
         char sendcommandtognd[64] = { 0 };
         string dtime = ("0");
         string argumentstr = ("0");
@@ -95,18 +95,21 @@ int main()
                 add = add + wrong;
                 strcpy(newreceiving, add.c_str());
                 SendCom(newreceiving, 2);
+                add = ("0");
             }
         }
         if (runnow == 0 && valid == 1 && receiving[0] != 'X') {
-            if (time<nextcommandtime && nextcommandch[0]!='\0') {
+            cout << time << endl;
+            cout << nextcommandch << endl;
+            cout << nextcommandtime << endl;
+            if (time<nextcommandtime && nextcommandch[0]!='y') {
                 timetag(nextcommandch);
                 nextcommandtime = time;
-                nextcommandch = receiving;
+                strcpy(nextcommandch, receiving);
             }
-            else if (time < nextcommandtime && nextcommandch[0] == '\0') {
+            else if (time < nextcommandtime && nextcommandch[0] == 'y') {
                 nextcommandtime = time;
-                nextcommandch = receiving;
-
+                strcpy(nextcommandch,receiving);
             }
             else{ 
                 timetag(receiving);
@@ -118,21 +121,21 @@ int main()
             SendCom(sendcommandtognd, 2);
             SendCom(sendcommandtognd, 3);
         }
-        else if(runnow == 1){
-            RunCom(receiving, commandstr, argumentt, argumentstr, commandf);
+        else if(runnow == 1 && valid == 1){
+            RunCom(receiving, commandstr, argumentt, argumentstr, commandf, argumentf);
         }
         else {
             //add code to check for next command in bucket and seeing if it is less then current time
             if (GetTime()>=nextcommandtime) {
-                cout << 1;
                 SplitTC(&time, &dtime, sequencef, &targetstr, targetf, &commandstr, commandf, &argumentstr, argumentf, &argumentt, nextcommandch);
-                RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf);
+                cout << nextcommandch << endl;
+                cout << commandstr << endl;
+                RunCom(nextcommandch, commandstr, argumentt, argumentstr, commandf, argumentf);
                 nextcommand = extractfirstcommandbucket();
                 strcpy(nextcommandch, nextcommand.c_str());
                 nextcommandtime = timeofextractedcommand(nextcommand);
             }
             else {
-                cout << 2;
                 SendCom(sendcommandtognd, 3);
             }
         }

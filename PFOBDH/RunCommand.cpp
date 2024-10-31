@@ -11,7 +11,7 @@
 #include "TimeDiff.h"
 using namespace std;
 
-void RunCom(char receivedcom[64], string commandstr, int argumentt, string argumentstr, char commandf[64]) {
+void RunCom(char receivedcom[64], string commandstr, int argumentt, string argumentstr, char commandf[64], char argumentf[64]) {
     string wholecommand;
     if (commandstr == "set_time") {
         SetTime(argumentt);
@@ -19,10 +19,9 @@ void RunCom(char receivedcom[64], string commandstr, int argumentt, string argum
         wholecommand = " Time changed ";
     }
     else if (commandstr == "chng_mode") {
-        cout << "you fogot to change GetCommand port RETARD" << endl;
         SetMode(argumentstr);
-        SendCom(commandf, 2);
-        char* PLCommand = GetCommand(2);
+        SendCom(argumentf, 5);
+        char* PLCommand = GetCommand(6);
         wholecommand = " Mode changed ";
     }
     else if (commandstr == "rmve_data") {
@@ -30,9 +29,8 @@ void RunCom(char receivedcom[64], string commandstr, int argumentt, string argum
         wholecommand = " Command removed ";
     }
     else if (commandstr == "t_picture") {
-        cout << "you fogot to change GetCommand port RETARD" << endl;
-        SendCom(commandf, 2);
-        char* PLCommand = GetCommand(2);
+        SendCom(commandf, 5);
+        char* PLCommand = GetCommand(6);
         wholecommand = PLCommand;
     }
     else {
