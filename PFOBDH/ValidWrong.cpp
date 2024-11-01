@@ -25,7 +25,7 @@ string validwrong(int timevalid, int sequencevalid, int targetvalid, int command
         return wrong;
     }
     else {
-        wrong = " Something is very wrong ith code";
+        wrong = " Something is very wrong the code";
         return wrong;
 
     }

@@ -44,7 +44,7 @@ void RunCom(char receivedcom[64], string commandstr, int argumentt, string argum
         wholecommand = PLCommand;
     }
     else {
-        cout << "sum ting wong" << endl;
+        cout << "Command cant be executed" << endl;
     }
     string timeofexe = int2hhmmss(GetTime());
     wholecommand = timeofexe + wholecommand;
